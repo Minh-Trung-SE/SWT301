@@ -23,6 +23,7 @@ const example = async () => {
 
     try {
         await driver.get('http://127.0.0.1:5500');
+        await driver.sleep(5000)
 
         //INPUT test case
         const tasks = [
@@ -124,7 +125,7 @@ const example = async () => {
                 const remainTaskContent = await driver.findElement(By.css("#todo li")).getAttribute('innerText');
                 if(remainTaskContent != removeTaskContent){
                     testCase.case_3.passed = 'PASSED'
-                    testCase.case_2.error = "NO ERROR"
+                    testCase.case_3.error = "NO ERROR"
                 }else{
                     testCase.case_3.passed = 'NOT PASSED'
                     testCase.case_3.error = `Remove task ${removeTaskContent} failed!`
@@ -134,8 +135,6 @@ const example = async () => {
             testCase.case_3.passed = 'NOT PASSED'
             testCase.case_3.error = `Test case 2 NOT PASSED`
         }
-
-        await driver.sleep(4000);
     } catch (e) {
         console.log(e);
     } finally {
