@@ -22,7 +22,7 @@ const example = async () => {
     let driver = await new Builder().forBrowser(Browser.FIREFOX).build();
 
     try {
-        await driver.get('http://127.0.0.1:5500');
+        await driver.get('https://fuhcm-swt301.web.app');
         await driver.sleep(5000)
 
         //INPUT test case
