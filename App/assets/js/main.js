@@ -27,29 +27,11 @@ document.getElementById('item').addEventListener('keydown', function (e) {
 });
 
 function addItem (value) {
-  addItemToDOM(value);
   document.getElementById('item').value = '';
+  addItemToDOM(value);
 
   data.todo.push(value);
   dataObjectUpdated();
-}
-
-function renderTodoList() {
-  if (!data.todo.length && !data.completed.length) return;
-
-  for (var i = 0; i < data.todo.length; i++) {
-    var value = data.todo[i];
-    addItemToDOM(value);
-  }
-
-  for (var j = 0; j < data.completed.length; j++) {
-    var value = data.completed[j];
-    addItemToDOM(value, true);
-  }
-}
-
-function dataObjectUpdated() {
-  localStorage.setItem('todoList', JSON.stringify(data));
 }
 
 function removeItem() {
@@ -63,8 +45,8 @@ function removeItem() {
   } else {
     data.completed.splice(data.completed.indexOf(value), 1);
   }
-  dataObjectUpdated();
 
+  dataObjectUpdated();
   parent.removeChild(item);
 }
 
@@ -97,8 +79,9 @@ function addItemToDOM(text, completed) {
   var item = document.createElement('li');
   var todoContent = document.createElement('span');
   todoContent.innerText = text;
-  item.appendChild(todoContent);
 
+  //BUG CASE 1
+  item.appendChild(todoContent);
 
   var buttons = document.createElement('div');
   buttons.classList.add('buttons');
@@ -107,7 +90,8 @@ function addItemToDOM(text, completed) {
   remove.classList.add('remove');
   remove.innerHTML = removeSVG;
 
-  // Add click event for removing the item
+  //Add click event for removing the item
+  //BUG CASE 3
   remove.addEventListener('click', removeItem);
 
   var complete = document.createElement('button');
@@ -115,6 +99,7 @@ function addItemToDOM(text, completed) {
   complete.innerHTML = completeSVG;
 
   // Add click event for completing the item
+  //BUG CASE 2
   complete.addEventListener('click', completeItem);
 
   buttons.appendChild(remove);
@@ -122,4 +107,22 @@ function addItemToDOM(text, completed) {
   item.appendChild(buttons);
 
   list.insertBefore(item, list.childNodes[0]);
+}
+
+function dataObjectUpdated() {
+  localStorage.setItem('todoList', JSON.stringify(data));
+}
+
+function renderTodoList() {
+  if (!data.todo.length && !data.completed.length) return;
+
+  for (var i = 0; i < data.todo.length; i++) {
+    var value = data.todo[i];
+    addItemToDOM(value);
+  }
+
+  for (var j = 0; j < data.completed.length; j++) {
+    var value = data.completed[j];
+    addItemToDOM(value, true);
+  }
 }
