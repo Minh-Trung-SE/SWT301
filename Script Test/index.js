@@ -29,7 +29,8 @@ const runTest = async () => {
     let driver
     try {
         driver = await new Builder().forBrowser(Browser.FIREFOX).build();
-        await driver.get('http://localhost:5500');
+        //await driver.get('https://fuhcm-swt301.web.app');
+        await driver.get('http://127.0.0.1:5500');
     } catch (e) {
         console.log("Can't load driver.");
     }
@@ -112,6 +113,7 @@ const runTest = async () => {
         testCase.case_2.passed = "NOT PASED";
         testCase.case_2.error = "Mark task as completed feature failed!";
     }
+    await driver.sleep(5000)
 
     //TEST CASE 3
     try {
@@ -121,6 +123,7 @@ const runTest = async () => {
             const removeTaskElement = await driver.findElement(By.css('#todo li:first-child'));
             //Get content of task mark done
             const removeTaskContent = await removeTaskElement.getAttribute('innerText');
+            console.log(`Remove task: ${removeTaskContent}`);
             //await driver.sleep(2000);
             //Click mark done toggle
             await removeTaskElement.findElement(By.css('button:first-child')).click()
@@ -148,6 +151,7 @@ const runTest = async () => {
         testCase.case_3.passed = 'NOT PASSED'
         testCase.case_3.error = `Remove task feature failed!`
     }
+    await driver.sleep(5000)
 
     await driver.quit();
     console.table(testCase)
