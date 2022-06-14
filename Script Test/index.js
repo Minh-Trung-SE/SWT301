@@ -71,7 +71,7 @@ const runTest = async () => {
         testCase.case_1.passed = "NOT PASED";
         testCase.case_1.error = "Add new task feature failed!";
     }
-    await driver.sleep(5000)
+
     //TEST CASE 2
     try {
         console.log('\nTEST CASE 2: Execute');
@@ -113,7 +113,7 @@ const runTest = async () => {
         testCase.case_2.passed = "NOT PASED";
         testCase.case_2.error = "Mark task as completed feature failed!";
     }
-    await driver.sleep(5000)
+
 
     //TEST CASE 3
     try {
@@ -151,10 +151,9 @@ const runTest = async () => {
         testCase.case_3.passed = 'NOT PASSED'
         testCase.case_3.error = `Remove task feature failed!`
     }
-    await driver.sleep(5000)
 
     await driver.quit();
-    console.table(testCase)
+    console.table(testCase);
 }
 
 runTest()
