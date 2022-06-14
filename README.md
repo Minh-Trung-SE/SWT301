@@ -7,3 +7,8 @@
     ```sh
     geckodriver -V
     ```
+    
+- cd 'Script Test'.
+    ```sh
+    node .\index.js
+    ```
